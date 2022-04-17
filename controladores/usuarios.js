@@ -6,6 +6,7 @@ const jwtSecret = require('../jwt_secret');
 const pwd = securePassword();
 
 const cadastrarUsuario = async (req, res) => {
+
     const { nome, email, senha } = req.body;
 
     if (!nome) {
@@ -19,7 +20,6 @@ const cadastrarUsuario = async (req, res) => {
     if (!senha) {
         return res.status(400).json('O campo senha é obrigatório!');
     }
-
     try {
         const usuario = await conexao.query('select * from usuarios where email = $1', [email]);
 
@@ -29,17 +29,14 @@ const cadastrarUsuario = async (req, res) => {
     } catch (error) {
         return res.status(400).json(error.message);
     }
-
     try {
         const hash = (await pwd.hash(Buffer.from(senha))).toString("hex");
 
         const usuario = await conexao.query('insert into usuarios (nome, email, senha) values ($1, $2, $3) returning id, nome, email', [nome, email, hash]);
-
         if (usuario.rowCount === 0) {
             return res.status(400).json('Não foi possível cadastrar o usuário.');
         }
-
-        return res.status(200).json(usuario.rows[0]);
+        return res.status(201).json(usuario.rows[0]);
     } catch (error) {
         return res.status(400).json(error.message);
     }

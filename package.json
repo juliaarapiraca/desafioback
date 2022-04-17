@@ -4,7 +4,8 @@
   "description": "![](https://i.imgur.com/xG74tOh.png)",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "serve": "json-server --watch db.json --port 8000"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,9 @@
   },
   "homepage": "https://github.com/juliaarapiraca/desafio-backend-03-dindin-t05#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.3",
+    "json-server": "^0.17.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.3",
     "secure-password": "^4.0.0"
