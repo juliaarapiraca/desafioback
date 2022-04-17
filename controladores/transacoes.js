@@ -81,9 +81,18 @@ const cadastrarTransacao = async (req, res) => {
             return res.status(400).json('Não foi possível cadastrar a transação.');
         }
 
-        const transacaoFormatada = await conexao.query('select transacoes.*, categorias.descricao as categoria_nome from transacoes inner join categorias on transacoes.categoria_id = categorias.id where transacoes.id = $1', [transacao.rows[0].id]);
+        const categoria_descricao = await conexao.query('select descricao from categorias where id = $1',[categoria_id]);
 
-        return res.status(200).json(transacaoFormatada.rows[0]);
+        const respostaTransacao = {
+            id,
+            tipo,
+            descricao,
+            valor,
+            data,
+            categoria_id,
+            categoria_nome:categoria_descricao.rows[0].descricao
+        }
+        return res.status(200).json(respostaTransacao);
     } catch (error) {
         return res.status(400).json(error.message);
     }
@@ -179,7 +188,7 @@ const extratoTransacao = async (req, res) => {
 
     try {
         const { rows: totalEntrada } = await conexao.query('SELECT SUM(valor) FROM transacoes where tipo = $1 AND usuario_id = $2', ['entrada', id]);
-        const { rows: totalSaida } = await conexao.query('SELECT SUM(valor) FROM transacoes where tipo = $1 AND usuario_id = $2', ['saída', id]);
+        const { rows: totalSaida } = await conexao.query('SELECT SUM(valor) FROM transacoes where tipo = $1 AND usuario_id = $2', ['saida', id]);
 
         let entrada = totalEntrada[0];
         let saida = totalSaida[0];
