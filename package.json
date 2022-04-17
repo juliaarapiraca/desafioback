@@ -1,0 +1,29 @@
+{
+  "name": "desafio-backend-03-dindin-t05",
+  "version": "1.0.0",
+  "description": "![](https://i.imgur.com/xG74tOh.png)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juliaarapiraca/desafio-backend-03-dindin-t05.git"
+  },
+  "keywords": [],
+  "author": "Júlia Arapiraca e Luiz Henrique Araújo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juliaarapiraca/desafio-backend-03-dindin-t05/issues"
+  },
+  "homepage": "https://github.com/juliaarapiraca/desafio-backend-03-dindin-t05#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.3",
+    "secure-password": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
